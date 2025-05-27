@@ -1,1 +1,1 @@
-- Modificar contrasena del registro
+- Modificar contrasenia del registro
