@@ -1,0 +1,55 @@
+#contenedor_principal{
+  width: 100vw;
+  height: 100vh;
+  background-color: lightblue;
+  margin-top: 2%;
+  margin-bottom: 2%;
+}
+#contenedor_menu{
+  background-color: lightskyblue;
+  height: 100%;
+}
+#contenedor_gestiones{
+  background-color: lightcyan;
+  height: 100%;
+}
+.contenedor_campo_potrero{
+  background-color: lightsteelblue;
+  height: 44%;
+
+
+}
+.contenedor_botones{
+  background-color: lightseagreen;
+}
+.contenedor_formulario{
+  background-color: lightslategrey;
+}
+
+.botones{
+  width: 90%;
+  margin-top: 5%;
+  margin-bottom:5%
+}
+
+
+.contenedor_formularios{
+  background-color: lightcoral;
+  height: 100%;
+}
+.titulos{
+  text-align: center;
+}
+
+#alta_campo{
+  margin-top: 15%;
+}
+#modificar_campo{
+  margin-top: 15%;
+  display:none;
+}
+
+#eliminar_campo{
+  margin-top: 15%;
+  display:none;
+}

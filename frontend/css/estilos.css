@@ -1,0 +1,482 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Montserrat|Montserrat+Alternates|Poppins&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+html,
+.bodyIndex {
+  display: grid;
+  height: 100%;
+  width: 100%;
+  place-items: center;
+  background: #f2f2f2;
+  /* background: linear-gradient(-135deg, #084a83, #549ddb); */
+}
+
+/* Estilos del logo */
+
+#logo {
+  margin-top: -12%;
+  margin-bottom: -8%;
+}
+
+.divCentral {
+  margin-left: 20%;
+}
+
+/* Estilos del formulario de ingreso y registro */
+
+::selection {
+  background: #549ddb;
+  color: #fff;
+}
+.wrapper {
+  width: 380px;
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.1);
+}
+.wrapper .title {
+  font-size: 35px;
+  font-weight: 600;
+  text-align: center;
+  line-height: 100px;
+  color: #fff;
+  user-select: none;
+  border-radius: 15px 15px 0 0;
+  background: linear-gradient(-135deg, #084a83, #549ddb);
+}
+.wrapper form {
+  padding: 10px 30px 50px 30px;
+}
+.wrapper form .field {
+  height: 50px;
+  width: 100%;
+  margin-top: 20px;
+  position: relative;
+}
+.wrapper form .field input {
+  height: 100%;
+  width: 100%;
+  outline: none;
+  font-size: 17px;
+  padding-left: 20px;
+  border: 1px solid lightgrey;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+}
+.wrapper form .field input:focus,
+form .field input:valid {
+  border-color: #549ddb;
+}
+.wrapper form .field label {
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  color: #999999;
+  font-weight: 400;
+  font-size: 17px;
+  pointer-events: none;
+  transform: translateY(-50%);
+  transition: all 0.3s ease;
+}
+form .field input:focus ~ label,
+form .field input:valid ~ label {
+  top: 0%;
+  font-size: 16px;
+  color: #549ddb;
+  background: #fff;
+  transform: translateY(-50%);
+}
+form .content {
+  display: flex;
+  width: 100%;
+  height: 50px;
+  font-size: 16px;
+  align-items: center;
+  justify-content: space-around;
+}
+form .content .checkbox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+form .content input {
+  width: 15px;
+  height: 15px;
+  background: red;
+}
+form .content label {
+  color: #262626;
+  user-select: none;
+  padding-left: 5px;
+}
+form .content .pass-link {
+  color: "";
+}
+form .field input[type="submit"] {
+  color: #fff;
+  border: none;
+  padding-left: 0;
+  margin-top: -10px;
+  font-size: 20px;
+  font-weight: 500;
+  cursor: pointer;
+  background: linear-gradient(-135deg, #084a83, #549ddb);
+  transition: all 0.3s ease;
+}
+form .field input[type="submit"]:active {
+  transform: scale(0.95);
+}
+form .signup-link {
+  color: #262626;
+  margin-top: 20px;
+  text-align: center;
+}
+form .pass-link a,
+form .signup-link a {
+  color: #549ddb;
+  text-decoration: none;
+}
+form .pass-link a:hover,
+form .signup-link a:hover {
+  text-decoration: underline;
+}
+
+/* Estilos generales */
+.wrapper form .field {
+  height: 50px;
+  width: 100%;
+  margin-top: 20px;
+  position: relative;
+}
+
+.wrapper form .field select {
+  height: 100%;
+  width: 100%;
+  outline: none;
+  font-size: 17px;
+  padding-left: 20px;
+  border: 1px solid lightgrey;
+  border-radius: 25px;
+  background: #fff;
+  transition: all 0.3s ease;
+  appearance: none; /* Quitar el estilo por defecto del navegador */
+  cursor: pointer; /* Cambiar el cursor para indicar que es interactivo */
+}
+
+.wrapper form .field select:focus {
+  border-color: #549ddb;
+}
+
+.wrapper form .field label {
+  position: absolute;
+  top: 50%;
+  left: 20px;
+  color: #999999;
+  font-weight: 400;
+  font-size: 17px;
+  pointer-events: none;
+  transform: translateY(-50%);
+  transition: all 0.3s ease;
+  background: #fff; /* Fondo blanco para la etiqueta */
+  padding: 0 5px; /* Espaciado interno para la etiqueta */
+}
+
+.wrapper form .field select:focus ~ label,
+.wrapper form .field select:valid ~ label {
+  top: 0%;
+  font-size: 16px;
+  color: #549ddb;
+}
+
+.wrapper form .field input[type="submit"] {
+  color: #fff;
+  border: none;
+  padding-left: 0;
+  margin-top: -10px;
+  font-size: 20px;
+  font-weight: 500;
+  cursor: pointer;
+  background: linear-gradient(-135deg, #084a83, #549ddb);
+  transition: all 0.3s ease;
+}
+
+.wrapper form .field input[type="submit"]:active {
+  transform: scale(0.95);
+}
+
+/* Estilo específico para el select */
+.wrapper form .field select {
+  background: #fff; /* Fondo blanco */
+  border: 1px solid lightgrey;
+  border-radius: 25px; /* Bordes redondeados */
+  padding: 0 20px; /* Espaciado interno */
+  font-size: 17px;
+  color: #333; /* Color del texto */
+  cursor: pointer;
+}
+
+.wrapper form .field select:focus {
+  border-color: #549ddb; /* Color del borde al enfocar */
+}
+
+.wrapper form .field select option {
+  padding: 10px; /* Espaciado en las opciones */
+}
+
+/* Estilos de la barra de navegacion */
+
+html,
+.bodyHome {
+  height: 100%;
+  width: 100%;
+  /* background: linear-gradient(-135deg, #084a83, #549ddb); */
+}
+
+.mensajeBienvenida {
+  margin-top: 15px;
+  text-align: center;
+}
+
+nav {
+  height: 5%;
+  margin-top: -145px;
+  margin-right: 10px;
+}
+
+nav li {
+  font-size: 20px;
+  padding-top: 5%;
+  padding-right: 2%;
+  font-family: "Source Code Pro", monospace;
+}
+nav a {
+  text-decoration: none;
+  color: black;
+}
+
+nav a:hover {
+  color: white;
+}
+
+header {
+  height: 9%;
+  background: linear-gradient(-135deg, #084a83, #549ddb);
+}
+
+li {
+  list-style-type: none;
+}
+
+.icon-menu {
+  color: black;
+  font-size: xx-large;
+  font-weight: bolder;
+  padding-left: 1%;
+  padding-top: 0.5%;
+}
+
+.icon-menu:hover {
+  color: white;
+  cursor: pointer;
+}
+
+.logo {
+  margin-top: -4%;
+  height: 12%;
+  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.2));
+  position: absolute;
+  z-index: 1;
+}
+
+.logo:hover {
+  filter: drop-shadow(1px 5px 10px rgba(0, 0, 0, 0.7));
+}
+
+.logoIndex {
+  margin-left: 7%;
+}
+
+.flex {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.capa {
+  position: fixed;
+  width: 100%;
+  height: 100vh;
+  background: white;
+  z-index: -1;
+  top: 0;
+  left: 0;
+}
+
+/*Menù lateral*/
+#btn-menu {
+  display: none;
+}
+.container-menu {
+  position: absolute;
+  background: white;
+  width: 100%;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  margin-top: 12.2%;
+  transition: all 500ms ease;
+  opacity: 0;
+  visibility: hidden;
+}
+#btn-menu:checked ~ .container-menu {
+  opacity: 1;
+  visibility: visible;
+}
+.cont-menu {
+  width: 100%;
+  max-width: 250px;
+  background: linear-gradient(190deg, #549ddb, #084a83);
+  background: gr;
+  height: 100vh;
+  position: relative;
+  transition: all 500ms ease;
+  transform: translateX(-100%);
+}
+#btn-menu:checked ~ .container-menu .cont-menu {
+  transform: translateX(0%);
+}
+.cont-menu nav {
+  transform: translateY(15%);
+}
+.cont-menu nav a {
+  display: block;
+  text-decoration: none;
+  padding: 20px;
+  /* color: #c7c7c7; */
+  border-left: 5px solid transparent;
+  transition: all 400ms ease;
+}
+
+.primerItem {
+  margin-top: 10%;
+}
+
+.cont-menu nav a:hover {
+  border-left: 5px solid #c7c7c7;
+  background: #1f1f1f;
+}
+.cont-menu label {
+  position: absolute;
+  right: 5px;
+  top: -8%;
+  color: #fff;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+/* Estilos botones */
+
+.seccionBotones {
+  display: flex;
+  flex-direction: row;
+  gap: 23px;
+  width: 700px;
+  height: 35px;
+  position: absolute;
+  z-index: 1;
+}
+
+.botones {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 500;
+  cursor: pointer;
+  background: linear-gradient(-135deg, #084a83, #549ddb);
+  transition: all 0.3s ease;
+  border-radius: 50%;
+  height: 150%;
+  width: 150%;
+  outline: none;
+  font-size: 17px;
+  border: 1px solid lightgrey;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+}
+
+.botonIniciar{
+  color: #fff;
+  font-size: 20px;
+  font-weight: 500;
+  cursor: pointer;
+  background: linear-gradient(-135deg, #084a83, #549ddb);
+  transition: all 0.3s ease;
+  border-radius: 50%;
+  height: 100%;
+  width: 100%;
+  outline: none;
+  font-size: 17px;
+  border: 1px solid lightgrey;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+}
+/* Estilos Formularios */
+
+.seccionFormularios {
+  margin-left: 380px;
+  margin-top: 30px;
+  width: 50%;
+  position: absolute;
+  z-index: 1;
+}
+
+.titulosSecciones {
+  text-align: center;
+  margin-top: 470px;
+  position: relative;
+  z-index: 1;
+}
+
+.seccionPotrero{
+  text-align: center;
+  margin-top: 600px;
+  position: relative;
+  z-index: 1;
+}
+
+table {
+  width: 80%;
+  margin-top: 15px;
+  margin-left: 260px;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: absolute;
+  z-index: 1;
+}
+
+thead th {
+  background-color: #f5f5f5;
+  font-weight: bold;
+  text-align: left;
+  padding: 12px;
+  border-bottom: 2px solid #ccc;
+}
+
+tbody td {
+  padding: 12px;
+  border-bottom: 1px solid #ddd;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #fafafa;
+}
