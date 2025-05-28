@@ -2,24 +2,56 @@
 
 require_once __DIR__ . '../../../../backend/controladores/usuarioController.php';
 
+session_start();
+
+// Verificar si el usuario está logueado
+if (!isset($_SESSION['username'])) {
+  // Redirigir al login si no está logueado
+  header("Location: ../../../index.php");
+  exit();
+}
+
+// Verificar si es administrador
+if (['rol_id'] != 1) {
+  // Redirigir al inicio u otra página si no es admin
+  header("Location: ../../../index.php");
+  exit();
+}
+
 $mensaje = "";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $username = trim($_POST['username']);
   $email = trim($_POST['email']);
   $password = $_POST['password'];
-  $rol_id = 1; // 1 para admin, 2 para usuario
+  $confPassword = $_POST['confPassword'];
+  $rol_id = isset($_POST['rol_id']) ? (int) $_POST['rol_id'] : 0; // 1 para admin, 2 para usuario
 
-  if (!empty($username) && !empty($email) && !empty($password)) {
-    $token = bin2hex(random_bytes(32));
-    $controller = new UsuarioController();
-    $registrado = $controller->registrarUsuario($username, $email, $password, $rol_id, $token);
+  $controller = new UsuarioController();
 
-    if ($registrado) {
-      $mensaje = "Registro exitoso";
-      header('Location: ../../../index.php');
+  if (!empty($username) && !empty($email) && !empty($password) && !empty($confPassword) && !empty($rol_id)) {
+    if (
+      strlen($password) < 8 ||
+      !preg_match('/[A-Z]/', $password) ||
+      !preg_match('/[0-9]/', $password) ||
+      !preg_match('/[^a-zA-Z0-9]/', $password)
+    ) {
+      $mensaje = "La contraseña debe tener al menos 8 caracteres, una mayúscula, un número y un carácter especial.";
+    } elseif ($password !== $confPassword) {
+      $mensaje = "Las contraseñas no coinciden.";
+    } elseif ($rol_id === 0) {
+      $mensaje = "Debe seleccionar un rol válido.";
     } else {
-      $mensaje = "El usuario o el correo ya están registrados.";
+      $token = bin2hex(random_bytes(32));
+      $respuesta = $controller->registrarUsuario($username, $email, $password, $rol_id, $token);
+      if (is_array($respuesta) && isset($respuesta['success']) && $respuesta['success'] === true) {
+        $mensajeExito = true;
+        $_POST = [];
+      } elseif (is_array($respuesta) && isset($respuesta['message'])) {
+        $mensaje = $respuesta['message'];
+      } else {
+        $mensaje = "Error inesperado al registrar el usuario.";
+      }
     }
   } else {
     $mensaje = "Todos los campos son obligatorios.";
@@ -39,54 +71,67 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 
 <body class="bodyHome">
-  <header class="bordeH">
-    <div class="btn-menu">
-      <label for="btn-menu" class="icon-menu">☰</label>
-    </div>
-    <a href="adminHome.php" class="logoIndex"><img src="../../img/logoChico.png" alt="Logo Tambosoft" class="logo" /></a>
-    <nav>
-      <ul class="flex">
-      </ul>
-    </nav>
-  </header>
-  <div class="capa"></div>
+  <?php require_once __DIR__ . '../../secciones/header.php'; ?>
   <!--	--------------->
-  <input type="checkbox" id="btn-menu" />
-  <div class="container-menu">
-    <div class="cont-menu">
-      <nav>
-        <a href="../campo/campo.php" class="primerItem">Campos</a>
-        <a href="../potrero/potrero.php">Potreros</a>
-        <a href="#">Animales</a>
-        <a href="#">Alimentos</a>
-        <a href="registrar.php">Usuarios</a></br></br></br></br>
-        <a href="cerrarSesion.php">Cerrar sesión</a>
+  <?php require_once __DIR__ . '../../secciones/navbar.php'; ?>
 
-      </nav>
-      <!-- <label for="btn-menu">X</label> -->
+  <div class="main">
+    <div class="form-container">
+      <div class="form-title">Registrar usuario</div>
+      <form method="POST">
+        <div class="form-group">
+          <input type="text" id="username" name="username" value="<?= htmlspecialchars($_POST['username'] ?? '') ?>"
+            placeholder=" ">
+          <label for="username">Usuario</label>
+        </div>
+        <div class="form-group">
+          <input type="text" id="email" name="email" value="<?= htmlspecialchars($_POST['email'] ?? '') ?>"
+            placeholder=" ">
+          <label for="email">Email</label>
+        </div>
+        <div class="form-group">
+          <input type="password" id="password" name="password" placeholder=" ">
+          <label for="password">Contraseña</label>
+        </div>
+        <div class="form-group">
+          <input type="password" id="confPassword" name="confPassword" placeholder=" ">
+          <label for="confPassword">Confirmar contraseña</label>
+        </div>
+        <div class="form-group">
+          <select name="rol_id" value="<?= htmlspecialchars($_POST['rol_id'] ?? '') ?>">
+            <option value="">Seleccionar rol</option>
+            <option value="1">Administrador</option>
+            <option value="2">Usuario</option>
+          </select>
+        </div>
+        <button type="submit">Ingresar</button>
+      </form>
+      <!-- Mensajes de error o éxito -->
+      <?php if (!empty($mensaje)): ?>
+        <script>
+          Swal.fire({
+            icon: 'info',
+            title: 'Atención',
+            text: '<?= json_encode($mensaje) ?>',
+            confirmButtonColor: '#3085d6'
+          });
+        </script>
+      <?php endif; ?>
+      <?php if (!empty($mensajeExito)): ?>
+        <script>
+          document.addEventListener("DOMContentLoaded", function () {
+            Swal.fire({
+              icon: 'success',
+              title: 'Registro exitoso',
+              text: 'El usuario fue registrado correctamente',
+              confirmButtonColor: '#3085d6'
+            }).then(() => {
+              window.location.href = '../campo/campo.php';
+            });
+          });
+        </script>
+      <?php endif; ?>
     </div>
-  </div>
-
-  <div class="wrapper seccionFormularios">
-    <div class="title">Registrar usuario</div>
-    <form method="POST">
-      <div class="field">
-        <input type="text" id="username" name="username" required>
-        <label for="username">Nombre de usuario</label>
-      </div>
-      <div class="field">
-        <input type="text" id="email" name="email" required>
-        <label for="email">Email</label>
-      </div>
-      <div class="field">
-        <input type="password" id="password" name="password" required>
-        <label for="password">Contraseña</label>
-      </div>
-      <div class="field">
-        <button type="submit" class="botonIniciar">Registrarse</button>
-      </div>
-      <?php if (!empty($mensaje)) echo "<p>$mensaje</p>"; ?>
-    </form>
   </div>
 </body>
 

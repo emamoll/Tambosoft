@@ -18,13 +18,26 @@ class UsuarioController
     $existeUsername = $this->usuarioDAO->getUsuarioByUsername($username);
     $existeEmail = $this->usuarioDAO->getUsuarioByEmail($email);
 
-    if (!$existeUsername || !$existeEmail) {
-      $this->usuarioDAO->verificarRoles();
-      $usuario = new Usuario(null, $username, $email, $hash, $rol_id, $token);
-      return $this->usuarioDAO->registrarUsuario($usuario);
+    if ($existeUsername) {
+      return ['success' => false, 'message' => 'Usuario ya existe'];
     }
 
-    return null;
+    if ($existeEmail) {
+      return ['success' => false, 'message' => 'Email ya existe'];
+    }
+
+    if (!$existeUsername && !$existeEmail) {
+      $this->usuarioDAO->verificarRoles();
+      $usuario = new Usuario(null, $username, $email, $hash, $rol_id, $token);
+      $resultado = $this->usuarioDAO->registrarUsuario($usuario);
+      if ($resultado) {
+        return ['success' => true];
+      } else {
+        return ['success' => false, 'message' => 'Error al registrar el usuario'];
+      }
+    }
+
+    return false;
   }
 
   public function loginUsuario($username, $password)
@@ -48,8 +61,18 @@ class UsuarioController
     return null;
   }
 
-  public function getUsuarioPorToken($token)
+  public function getUsuarioByUsername($username)
   {
-    return $this->usuarioDAO->getUsuarioPorToken($token);
+    return $this->usuarioDAO->getUsuarioByUsername($username);
+  }
+
+  public function getUsuarioByEmail($email)
+  {
+    return $this->usuarioDAO->getUsuarioByEmail($email);
+  }
+
+  public function getUsuarioByToken($token)
+  {
+    return $this->usuarioDAO->getUsuarioByToken($token);
   }
 }

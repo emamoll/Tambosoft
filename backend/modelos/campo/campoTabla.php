@@ -7,6 +7,11 @@ class CampoCrearTabla
 {
   private $db;
 
+  public function __construct($db)
+  {
+    $this->db = $db;
+  }
+
   public function crearTablaCampos()
   {
     $this->db = DatabaseFactory::createDatabaseConnection('mysql');

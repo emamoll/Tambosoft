@@ -91,7 +91,7 @@ class UsuarioDAO
     return new Usuario($id, $username, $email, $password, $rol_id, $token);
   }
 
-  public function getUsuarioPorToken($token)
+  public function getUsuarioByToken($token)
   {
     $sql = "SELECT id, username, email, password, rol_id, token FROM usuarios WHERE token = ?";
     $stmt = $this->conn->prepare($sql);
@@ -99,7 +99,8 @@ class UsuarioDAO
     $stmt->execute();
     $stmt->store_result();
 
-    if ($stmt->num_rows === 0) return null;
+    if ($stmt->num_rows === 0)
+      return null;
 
     $stmt->bind_result($id, $username, $email, $password, $rol_id, $token);
     $stmt->fetch();
@@ -122,7 +123,6 @@ class UsuarioDAO
     $stmt->execute();
     $stmt->bind_param("s", $rol2);
     $stmt->execute();
-    $this->conn->close();
   }
 
   public function verificarRoles()
@@ -139,6 +139,11 @@ class UsuarioDAO
   {
     $sql = "INSERT INTO usuarios (username, email, password, rol_id, token) VALUES (?, ?, ?, ?, ?)";
     $stmt = $this->conn->prepare($sql);
+
+    if (!$stmt) {
+      echo ("Error en prepare: " . $this->conn->error);
+      return false;
+    }
     $us = $u->getUsername();
     $e = $u->getEmail();
     $p = $u->getPassword();
@@ -146,7 +151,12 @@ class UsuarioDAO
     $t = $u->getToken();
     $stmt->bind_param("sssis", $us, $e, $p, $r, $t);
 
-    return $stmt->execute();
+    $resultado = $stmt->execute();
+    if (!$resultado) {
+      echo ("Error en execute: " . $stmt->error);
+    }
+
+    return $resultado;
   }
 
   public function loginUsuario($username, $password)

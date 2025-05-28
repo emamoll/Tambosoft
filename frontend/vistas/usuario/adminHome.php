@@ -9,7 +9,7 @@ if (!isset($_SESSION['token'])) {
 }
 
 $controller = new UsuarioController();
-$usuario = $controller->getUsuarioPorToken($_SESSION['token']);
+$usuario = $controller->getUsuarioByToken($_SESSION['token']);
 
 if (!$usuario) {
   session_destroy();

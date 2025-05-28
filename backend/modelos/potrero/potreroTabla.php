@@ -6,6 +6,11 @@ require_once __DIR__ . '../../../servicios/databaseConnectionInterface.php';
 class PotreroCrearTabla{
   private $db;
 
+  public function __construct($db)
+  {
+    $this->db = $db;
+  }
+
   public function crearTablaPotrero(){
     $this->db = DatabaseFactory::createDatabaseConnection('mysql');
     $conn = $this->db->connect();

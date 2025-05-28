@@ -7,6 +7,11 @@ class UsuarioCrearTabla
 {
   private $db;
 
+  public function __construct($db)
+  {
+    $this->db = $db;
+  }
+
   public function crearTablaRoles()
   {
     $this->db = DatabaseFactory::createDatabaseConnection('mysql');
