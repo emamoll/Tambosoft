@@ -38,33 +38,10 @@ if ($usuario->getRol_id() != 1) {
 </head>
 
 <body class="bodyHome">
-  <header class="bordeH">
-    <div class="btn-menu">
-      <label for="btn-menu" class="icon-menu">☰</label>
-    </div>
-    <a href="adminHome.php" class="logoIndex"><img src="../../img/logoChico.png" alt="Logo Tambosoft" class="logo" /></a>
-    <nav>
-      <ul class="flex">
-      </ul>
-    </nav>
-  </header>
-  <div class="capa"></div>
+  <?php require_once __DIR__ . '../../secciones/header.php'; ?>
   <!--	--------------->
-  <input type="checkbox" id="btn-menu" />
-  <div class="container-menu">
-    <div class="cont-menu">
-      <nav>
-        <a href="../campo/campo.php" class="primerItem">Campos</a>
-        <a href="../potrero/potrero.php">Potreros</a>
-        <a href="#">Animales</a>
-        <a href="#">Alimentos</a>
-        <a href="../usuario/registrar.php">Usuarios</a></br></br></br></br>
-        <a href="cerrarSesion.php">Cerrar sesión</a>
+  <?php require_once __DIR__ . '../../secciones/navbar.php'; ?>
 
-      </nav>
-      <!-- <label for="btn-menu">X</label> -->
-    </div>
-  </div>
 
   <h1 class="mensajeBienvenida">Bienvenido <?php echo $usuario->getUsername() ?></h1>
 </body>

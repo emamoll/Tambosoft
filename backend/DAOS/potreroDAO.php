@@ -96,11 +96,14 @@ class PotreroDAO
     $stmtVer = $this->conn->prepare($sqlVer);
     $nombre = $p->getNombre();
     $stmtVer->bind_param("s", $nombre);
+    $stmtVer->execute();
     $stmtVer->store_result();
 
     if ($stmtVer->num_rows > 0) {
       return false;
     }
+
+    $stmtVer->close();
 
     $sql = "INSERT INTO potreros (nombre, superficie, pastura, campo_id) VALUES (?, ?, ?, ?)";
     $stmt = $this->conn->prepare($sql);
@@ -113,6 +116,8 @@ class PotreroDAO
     if (!$stmt->execute()) {
       die("Error en execute (inserción): " . $stmt->error);
     }
+
+    $stmt->close();
 
     return true;
   }

@@ -14,12 +14,36 @@ body, html {
   background: var(--fondo-background);
 }
 
+/* Estilos del login */
 
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh; /* ocupa toda la altura */
+  background-color: #f5f5f5; /* color de fondo opcional */
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.logo-container {
+  text-align: center;
+  position: absolute;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.logoIndex {
+  max-width: 400px;
+  height: auto;
+}
 
 .form-container {
   max-width: 400px;
-  margin: 80px auto;
-  padding: 30px;
+  width: 90%;
+  margin: 0 auto;
+  padding: 50px 40px 40px;
   background: white;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.1);
@@ -63,6 +87,35 @@ body, html {
   top: -10px;
   font-size: 13px;
   color: var(--color-secundario);
+}
+
+.form-group select {
+  width: 100%;
+  padding: 12px 3px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: white;
+  color: #333;
+  font-family: inherit;
+  font-size: 16px;
+  appearance: none; 
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.select-group select {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background: white url('data:image/svg+xml;utf8,<svg fill="%23666" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>') no-repeat right 10px center;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-size: 20px;
+  font-family: Poppins, sans-serif;
+  color: #333;
+  box-sizing: border-box;
 }
 
 button {
@@ -141,13 +194,6 @@ nav a:hover {
   z-index: 1;
 }
 
-.logoIndex {
-  margin-left: 10px;
-  margin-top: 0;
-  position: relative;
-  z-index: 1;
-}
-
 .logo {
   height: 100px;
   object-fit: contain;
@@ -155,8 +201,8 @@ nav a:hover {
   filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.2));
   transition: transform 0.2s ease;
   position: absolute;
-  top: -25px;
-  left: 20px; 
+  top: -4px;
+  left: 50px; 
   z-index: 1;
 }
 
@@ -256,32 +302,20 @@ li {
 
 /* Estilos botones */
 
-.seccionBotones {
+.botones-container {
   display: flex;
-  flex-direction: row;
-  gap: 23px;
-  width: 700px;
-  height: 35px;
-  position: absolute;
-  z-index: 1;
+  justify-content: space-between;
+  gap: 15px;
 }
 
-.botones {
-  color: #fff;
-  font-size: 20px;
-  font-weight: 500;
+.botones-container button {
+  width: 100%;
+  padding: 12px;
+  background: var(--background-principal);
+  color: white;
+  border: none;
+  border-radius: 8px;
   cursor: pointer;
-  background: linear-gradient(-135deg, #084a83, #549ddb);
-  transition: all 0.3s ease;
-  border-radius: 50%;
-  height: 150%;
-  width: 150%;
-  outline: none;
-  font-size: 17px;
-  border: 1px solid lightgrey;
-  border-radius: 25px;
-  transition: all 0.3s ease;
-  margin-top: 10px;
 }
 
 .botonIniciar{
@@ -304,7 +338,6 @@ li {
 
 .seccionFormularios {
   margin-left: 380px;
-  margin-top: 30px;
   width: 50%;
   position: absolute;
   z-index: 1;
@@ -312,9 +345,7 @@ li {
 
 .titulosSecciones {
   text-align: center;
-  margin-top: 470px;
-  position: relative;
-  z-index: 1;
+  margin-bottom: 20px;
 }
 
 .seccionPotrero{
@@ -326,13 +357,30 @@ li {
 
 table {
   width: 80%;
-  margin-top: 15px;
-  margin-left: 260px;
+  margin-top: 0 auto 40px auto;
   border-collapse: collapse;
   font-family: Arial, sans-serif;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  position: absolute;
+  position: relative;
   z-index: 1;
+}
+
+#btn-menu:checked ~ .main #tablaContainer {
+  transform: translateX(130px);
+  transition: transform 0.3s ease;
+}
+
+#btn-menu:checked ~ .main #tablaContainerPo {
+  transform: translateX(130px);
+  transition: transform 0.3s ease;
+}
+
+#tablaContainer {
+  transition: transform 0.3s ease;
+}
+
+#tablaContainerPo {
+  transition: transform 0.3s ease;
 }
 
 thead th {
@@ -352,6 +400,12 @@ tbody tr:nth-child(even) {
   background-color: #fafafa;
 }
 
+#formCampoContainer {
+  width: 600px;
+  max-width: 100%;
+  margin-bottom: 40px;
+}
+
 
 /* Estilos para dispositivos */
 
@@ -361,7 +415,18 @@ tbody tr:nth-child(even) {
   }
 
   .logo {
-    height: 60px; /* más grande que antes pero proporcional en móvil */
+    height: 60px;
     transform: translateY(-10px);
   }
+
+  @media (max-width: 768px) {
+  .form-container {
+    padding: 20px;  
+    width: 90%; 
+  }
+
+  .logoIndex {
+    max-width: 180px;  
+  }
+}
 }

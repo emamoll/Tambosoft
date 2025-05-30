@@ -6,7 +6,7 @@
         <a href="../potrero/potrero.php">Potreros</a>
         <a href="#">Animales</a>
         <a href="#">Alimentos</a>
-        <a href="registrar.php">Usuarios</a></br></br></br></br>
+        <a href="../usuario/registrar.php">Usuarios</a></br></br></br></br>
         <a href="cerrarSesion.php">Cerrar sesión</a>
 
       </nav>

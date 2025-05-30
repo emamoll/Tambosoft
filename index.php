@@ -38,24 +38,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   <title>Tambosoft: Iniciar sesión</title>
   <link rel="icon" href="frontend/img/logo2.png" type="image/png">
   <link rel="stylesheet" href="frontend/css/estilos.css" />
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
-  <div class="contenido row justify-content-center">
-    <div class="row w-75 contenedor">
-      <img src="frontend/img/logo2.png" alt="Icono Tambosoft" id="logo">
-    </div>
-    <div class="wrapper divCentral">
-      <div class="title">Inicia sesion</div>
+  <div class="main">
+    <div class="form-container">
+      <div class="logo-container"><img src="frontend/img/logo2.png" alt="Icono Tambosoft" class="logoIndex"></div>
+      <div class="form-title">Iniciar sesión</div>
       <form method="POST">
-        <div class="field">
-          <input type="text" required name="username" id="username">
-          <label>Usuario</label>
+        <div class="form-group">
+          <input type="text" id="username" name="username"placeholder=" ">
+          <label for="username">Usuario</label>
         </div>
-        <div class="field">
-          <input type="password" required name="password" autocomplete="off" id="password">
-          <label>Contraseña</label>
+        <div class="form-group">
+          <input type="password" id="password" name="password" placeholder=" ">
+          <label for="password">Contraseña</label>
         </div>
+        <button type="submit">Ingresar</button>
+      </form>
+      <!-- Mensajes de error o éxito -->
+      <?php if (!empty($mensaje)): ?>
+        <script>
+          Swal.fire({
+            icon: 'info',
+            title: 'Atención',
+            text: '<?= json_encode($mensaje) ?>',
+            confirmButtonColor: '#3085d6'
+          });
+        </script>
+      <?php endif; ?>
+    </div>
+  </div>
         <!-- <div class="content">
                 <div class="checkbox">
                     <input type="checkbox" id="remember-me">
@@ -63,12 +77,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
                 <div class="pass-link"><a href="#">Olvide mi contraseña</a></div>
             </div> -->
-        <br>
-        <div class="field">
-          <button type="submit" class="botonIniciar">Iniciar sesión</button>
-        </div>
-        <?php if (!empty($mensaje)) echo "<p>$mensaje</p>"; ?>
-      </form>
     </div>
   </div>
 </body>

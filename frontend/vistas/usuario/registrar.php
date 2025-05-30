@@ -12,7 +12,7 @@ if (!isset($_SESSION['username'])) {
 }
 
 // Verificar si es administrador
-if (['rol_id'] != 1) {
+if ($_SESSION['rol_id'] != 1) {
   // Redirigir al inicio u otra página si no es admin
   header("Location: ../../../index.php");
   exit();
@@ -97,14 +97,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           <input type="password" id="confPassword" name="confPassword" placeholder=" ">
           <label for="confPassword">Confirmar contraseña</label>
         </div>
-        <div class="form-group">
+        <div class="form-group select-group">
           <select name="rol_id" value="<?= htmlspecialchars($_POST['rol_id'] ?? '') ?>">
-            <option value="">Seleccionar rol</option>
+            <option value="" disabled selected>Seleccionar rol</option>
             <option value="1">Administrador</option>
             <option value="2">Usuario</option>
           </select>
         </div>
-        <button type="submit">Ingresar</button>
+        <button type="submit">Registrar</button>
       </form>
       <!-- Mensajes de error o éxito -->
       <?php if (!empty($mensaje)): ?>
