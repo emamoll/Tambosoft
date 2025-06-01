@@ -14,8 +14,7 @@ class CampoController
 
   public function procesarFormularios()
   {
-    $mensaje = "";
-
+    $mensaje = '';
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $accion = $_POST['accion'] ?? '';
       $nombre = $_POST['nombre'] ?? '';

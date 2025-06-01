@@ -42,7 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 
 <body>
-  <div class="main">
+  <div class="main inputIndex">
     <div class="form-container">
       <div class="logo-container"><img src="frontend/img/logo2.png" alt="Icono Tambosoft" class="logoIndex"></div>
       <div class="form-title">Iniciar sesión</div>

@@ -1,7 +1,7 @@
 <header class="bordeH">
     <div class="left-header">
         <label for="btn-menu" class="icon-menu">☰</label>
-        <a href="adminHome.php" class="logoIndex">
+        <a href="../usuario/adminHome.php" class="logoIndex">
             <img src="../../img/logoChico.png" alt="Logo Tambosoft" class="logo" />
         </a>
     </div>

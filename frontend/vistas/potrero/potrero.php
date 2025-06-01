@@ -67,8 +67,7 @@ $campos = $controllerCampo->obtenerCampos();
           <select name="campo_nombre">
             <option value="" disabled <?= empty($_POST['campo_nombre']) ? 'selected' : '' ?>>Seleccione un campo</option>
             <?php foreach ($campos as $c): ?>
-            <option value="<?= htmlspecialchars($c->getNombre()) ?>"
-              <?= (isset($_POST['campo_nombre']) && $_POST['campo_nombre'] === $c->getNombre()) ? 'selected' : '' ?>>
+            <option value="<?= htmlspecialchars($c->getNombre()) ?>" <?= (isset($_POST['campo_nombre']) && $_POST['campo_nombre'] === $c->getNombre()) ? 'selected' : '' ?>>
               <?= htmlspecialchars($c->getNombre()) ?>
             </option>
             <?php endforeach; ?>
@@ -90,7 +89,7 @@ $campos = $controllerCampo->obtenerCampos();
             <?php if ($mensaje["tipo"] === "success"): ?>
               window.location.href = window.location.pathname; // recargar sin reenviar POST
             <?php endif; ?>
-    });
+          });
         </script>
         <?php endif; ?>
       </form>

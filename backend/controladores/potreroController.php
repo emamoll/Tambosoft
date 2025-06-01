@@ -15,7 +15,7 @@ class PotreroController
 
   public function procesarFormularios()
   {
-    $mensaje = "";
+    $mensaje = '';
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       $accion = $_POST['accion'] ?? '';
@@ -73,7 +73,7 @@ class PotreroController
             $campo_id_nuevo = $potreroActual->getCampo_id();
           }
 
-          $potreroModificado = new Potrero(null, $nombre, $superficie, $pastura, $campo_id_nuevo);
+          $potreroModificado = new Potrero(null, $nombre, $superficieNueva, $pasturaNueva, $campo_id_nuevo);
 
           if ($this->potreroDAO->modificarPotrero($potreroModificado)) {
             return ['tipo' => 'success', 'mensaje' => 'Potrero modificado correctamente'];
@@ -83,6 +83,12 @@ class PotreroController
         case 'eliminar':
           if (empty($nombre)) {
             return ['tipo' => 'error', 'mensaje' => 'Por favor, ingresá el nombre del potrero que querés eliminar.'];
+          }
+
+          $potreroActual = $this->potreroDAO->getPotreroByNombre($nombre);
+
+          if (!$potreroActual) {
+            return ['tipo' => 'error', 'mensaje' => 'Potrero no existe para modificar'];
           }
 
           if ($this->potreroDAO->eliminarPotrero($nombre)) {

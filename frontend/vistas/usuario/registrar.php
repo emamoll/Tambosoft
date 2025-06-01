@@ -110,7 +110,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <?php if (!empty($mensaje)): ?>
         <script>
           Swal.fire({
-            icon: 'info',
+            icon: 'error',
             title: 'Atención',
             text: '<?= json_encode($mensaje) ?>',
             confirmButtonColor: '#3085d6'
