@@ -3,6 +3,7 @@
 require_once __DIR__ . "../../DAOS/categoriaDAO.php";
 require_once __DIR__ . "../../DAOS/campoDAO.php";
 require_once __DIR__ . "../../modelos/potrero/potreroModelo.php";
+require_once __DIR__ . "../../controladores/campoController.php";
 
 class CategoriaController
 {
@@ -117,5 +118,24 @@ class CategoriaController
     public function obtenerCategorias()
     {
         return $this->categoriaDAO->getAllCategorias();
+    }
+
+    public function getCategoriasPorIds(array $ids): array
+    {
+        return $this->categoriaDAO->getCategoriasPorIds($ids);
+    }
+
+    public function obtenerCampoPorCategoriaNombre(string $categoriaNombre)
+    {
+        $categoria = $this->categoriaDAO->getCategoriaByNombre($categoriaNombre);
+        if ($categoria) {
+            $campoId = $categoria->getPotrero_id();
+            $campoController = new CampoController();
+            $campo = $campoController->getCampoById($campoId);
+            if ($campo) {
+                return $campo->getNombre();
+            }
+        }
+        return null;
     }
 }

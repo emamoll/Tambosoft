@@ -73,4 +73,9 @@ class CampoController
   {
     return $this->campoDAO->getAllCampos();
   }
+
+  public function getCampoById($id)
+  {
+    return $this->campoDAO->getCampoById($id);
+  }
 }

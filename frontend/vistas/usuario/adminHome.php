@@ -41,8 +41,6 @@ if ($usuario->getRol_id() != 1) {
   <?php require_once __DIR__ . '../../secciones/header.php'; ?>
   <!--	--------------->
   <?php require_once __DIR__ . '../../secciones/navbar.php'; ?>
-
-
   <h1 class="mensajeBienvenida">Bienvenido <?php echo $usuario->getUsername() ?></h1>
 </body>
 

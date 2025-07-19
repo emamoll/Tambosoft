@@ -409,6 +409,42 @@ tbody tr:nth-child(even) {
   margin-bottom: 40px;
 }
 
+/* Estilos para los estados */
+.estado-creada {
+  background-color: #a81d6a !important;
+  color: white;
+}
+
+.estado-enviada {
+  background-color: #1d6ea8 !important;
+  color: white;
+}
+
+.estado-enPreparacion {
+  background-color: #e6df1c !important;
+  color: white;
+}
+
+.estado-enTraslado {
+  background-color: #e6661c !important;
+  color: white;
+}
+
+.estado-entregada {
+  background-color: #5cb85c !important;
+  color: white;
+}
+
+.estado-cancelada {
+  background-color: #db3630 !important;
+  color: white;
+}
+
+.botonPDF{
+  display: flex !important;
+  justify-content: flex-end !important;
+}
+
 
 /* Estilos para dispositivos */
 

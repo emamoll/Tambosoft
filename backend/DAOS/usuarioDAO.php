@@ -110,24 +110,34 @@ class UsuarioDAO
 
   public function insertarRoles()
   {
-    $sql = "INSERT INTO roles (nombre) VALUES (?)";
-    $stmt = $this->conn->prepare($sql);
-    if (!$stmt) {
-      echo "Error en la consulta";
-      echo $this->conn->error;
-      exit;
+    $roles = ['Administrador', 'Tractorista', 'Gerencia'];
+
+    foreach ($roles as $rol) {
+      // Verificamos si el rol ya existe
+      $sqlVerificar = "SELECT id FROM roles WHERE nombre = ?";
+      $stmtVerificar = $this->conn->prepare($sqlVerificar);
+      $stmtVerificar->bind_param("s", $rol);
+      $stmtVerificar->execute();
+      $stmtVerificar->store_result();
+
+      if ($stmtVerificar->num_rows === 0) {
+        // Si no existe, lo insertamos
+        $stmtVerificar->close();
+
+        $sqlInsertar = "INSERT INTO roles (nombre) VALUES (?)";
+        $stmtInsertar = $this->conn->prepare($sqlInsertar);
+        $stmtInsertar->bind_param("s", $rol);
+        $stmtInsertar->execute();
+        $stmtInsertar->close();
+      } else {
+        $stmtVerificar->close(); // Ya existe, no lo insertamos
+      }
     }
-    $rol1 = 'Administrador';
-    $rol2 = 'Usuario';
-    $stmt->bind_param("s", $rol1);
-    $stmt->execute();
-    $stmt->bind_param("s", $rol2);
-    $stmt->execute();
   }
 
   public function verificarRoles()
   {
-    $sql = "SELECT COUNT(*) as count FROM roles WHERE nombre IN ('Administrador', 'Usuario')";
+    $sql = "SELECT COUNT(*) as count FROM roles WHERE nombre IN ('Administrador', 'Tractorista', 'Gerencia')";
     $result = $this->conn->query($sql);
     $row = $result->fetch_assoc();
     if ($row['count'] < 2) {

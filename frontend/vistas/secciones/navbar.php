@@ -6,8 +6,10 @@
         <a href="../potrero/potrero.php">Potreros</a>
         <a href="../categoria/categoria.php">Categorias</a>
         <a href="../alimento/alimento.php">Alimentos</a>
+        <a href="../orden/orden.php">Ordenes</a>
+        <a href="../stock/stock.php">Stocks</a>
         <a href="../usuario/registrar.php">Usuarios</a></br></br></br></br>
-        <a href="cerrarSesion.php">Cerrar sesión</a>
+        <a href="../usuario/cerrarSesion.php">Cerrar sesión</a>
 
       </nav>
     </div>

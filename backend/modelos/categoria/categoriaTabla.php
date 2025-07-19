@@ -1,7 +1,7 @@
 <?php
 
 require_once __DIR__ . "../../../servicios/databaseFactory.php";
-require_once __DIR__ . "../../../servicios//databaseConnectionInterface.php";
+require_once __DIR__ . "../../../servicios/databaseConnectionInterface.php";
 
 class CategoriaCrearTabla{
     private $db;

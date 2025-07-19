@@ -1,8 +1,8 @@
 <?php
 
 require_once __DIR__ . "../../servicios/databaseFactory.php";
-require_once __DIR__ . "../../modelos/alimentos/alimentoTabla.php";
-require_once __DIR__ . "../../modelos/alimentos/alimentoModelo.php";
+require_once __DIR__ . "../../modelos/alimento/alimentoTabla.php";
+require_once __DIR__ . "../../modelos/alimento/alimentoModelo.php";
 
 class AlimentoDAO
 {
@@ -125,6 +125,52 @@ class AlimentoDAO
 
         return new Alimento($id, $nombre, $precio, $descripcion, $peso, $fecha_vencimiento);
     }
+
+    public function getAlimentosPorIds(array $ids)
+    {
+        if (empty($ids)) {
+            return [];
+        }
+
+        $placeholders = implode(',', array_fill(0, count($ids), '?'));
+        $sql = "SELECT * FROM alimentos WHERE id IN ($placeholders)";
+        $stmt = $this->conn->prepare($sql);
+
+        if ($stmt === false) {
+            die("Error en prepare: " . $this->conn->error);
+        }
+
+        $tipos = str_repeat('i', count($ids));
+        $refs = [];
+        foreach ($ids as $key => $value) {
+            $refs[$key] = &$ids[$key];
+        }
+        array_unshift($refs, $tipos);
+
+        call_user_func_array([$stmt, 'bind_param'], $refs);
+
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+
+        $alimentos = [];
+
+        while ($row = $result->fetch_assoc()) {
+            $alimentos[] = new Alimento(
+                $row['id'],
+                $row['nombre'],
+                $row['precio'],
+                $row['descripcion'],
+                $row['peso'],
+                $row['fecha_vencimiento']
+            );
+        }
+
+        $stmt->close();
+
+        return $alimentos;
+    }
+
 
     public function registrarAlimento(Alimento $a)
     {

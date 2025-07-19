@@ -59,9 +59,16 @@ $campos = $controllerCampo->obtenerCampos();
           <label for="superficie">Superficie en ha</label>
         </div>
         <div class="form-group">
-          <input type="text" id="pastura" name="pastura" value="<?= htmlspecialchars($_POST['pastura'] ?? '') ?>"
-            placeholder=" ">
-          <label for="pastura">Pastura</label>
+          <label for="pastura"></label>
+          <select id="pastura" name="pastura">
+            <option value="">Seleccione una opción</option>
+            <option value="alfalfa" <?= (isset($_POST['pastura']) && $_POST['pastura'] === 'Alfalfa') ? 'selected' : '' ?>
+              >Alfalfa</option>
+            <option value="trigo" <?= (isset($_POST['pastura']) && $_POST['pastura'] === 'Trigo') ? 'selected' : '' ?>
+              >Trigo</option>
+            <option value="avena" <?= (isset($_POST['pastura']) && $_POST['pastura'] === 'Avena') ? 'selected' : '' ?>
+              >Avena</option>
+          </select>
         </div>
         <div class="form-group select-group">
           <select name="campo_nombre">

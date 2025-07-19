@@ -101,7 +101,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
           <select name="rol_id" value="<?= htmlspecialchars($_POST['rol_id'] ?? '') ?>">
             <option value="" disabled selected>Seleccionar rol</option>
             <option value="1">Administrador</option>
-            <option value="2">Usuario</option>
+            <option value="3">Gerencia</option>
+            <option value="2">Tractorista</option>
           </select>
         </div>
         <button type="submit">Registrar</button>

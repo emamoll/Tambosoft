@@ -9,11 +9,6 @@ if (!isset($_SESSION['username']) || !isset($_SESSION['rol_id'])) {
 	exit;
 }
 
-$mensajeExito = $_SESSION['mensajeExito'] ?? null;
-if ($mensajeExito) {
-	unset($_SESSION['mensajeExito']);
-}
-
 $controllerCategoria = new CategoriaController();
 $categorias = $controllerCategoria->obtenerCategorias();
 $mensaje = $controllerCategoria->procesarFormulario();

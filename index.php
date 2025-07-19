@@ -18,8 +18,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     if ($usuario->getRol_id() == 1) {
       header('Location: frontend/vistas/usuario/adminHome.php');
-    } else {
-      header('Location: frontend/vistas/usuario/usuarioHome.php');
+    } elseif ($usuario->getRol_id() == 2){
+      header('Location: frontend/vistasTractorista/usuario/tractoristaHome.php');
+    }else{
+      header('Location: frontend/vistasGerencia/usuario/gerenciaHome.php');
     }
     exit;
   } else {
